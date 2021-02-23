@@ -9,3 +9,15 @@
  * HINT:
  * This can be solved using either a LEFT JOIN or the NOT IN operator.
  */
+
+SELECT last_name, first_name
+FROM (
+    SELECT first_name || ' ' || last_name as full_name, first_name, last_name
+    FROM actor
+) AS actor_full_names
+WHERE full_name NOT IN (
+    SELECT first_name || ' ' || last_name as full_name
+    FROM customer
+)
+ORDER BY last_name, first_name;
+
